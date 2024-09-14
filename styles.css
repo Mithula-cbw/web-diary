@@ -1,9 +1,23 @@
 :root{
-    --bg-color: rgb(0, 0, 0);
+    --bg-color: #1D0042;
     --sec-color: rgb(207, 52, 52);
-    --text-color: white;
+    --tri-color:#420D73;
+    --text-color: #c075e9;
+    --high-text:rgba(255, 255, 255, 0.721);
+    --gray-color1:rgba(255, 255, 255, 0.742);
     --main-font: "Space Grotesk" ,sans-serif;
+    --sec-font: "Dancing Script" ,sans-serif;    
+    --tri-font: "Zain" ,sans-serif;
 }
+
+/* :root{
+    --bg-color: #3b0b15;
+    --sec-color: rgb(207, 52, 52);
+    --tri-color:#d94a51;
+    --text-color: #fbb42f;
+    --high-text:white;
+    --main-font: "Space Grotesk" ,sans-serif;
+} */
 
 
 
@@ -35,15 +49,16 @@ body{
     height: 280px;
     background: 
         linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
-        url(/img/hero-banner.jpg) no-repeat center center;
+        url(/img/hero-banner1.jpg) no-repeat center center;
     background-size: cover;
     background-position: center;
+    background-color: var(--bg-color);
     font-family: "Space Grotesk" ,sans-serif;
     z-index: 100;
 }
 
 #date-hero{
-    color: rgba(255, 255, 255, 0.758);
+    color: var(--text-color);
     font-family: "Space Grotesk" ,sans-serif;
     font-size: 40px;
     position: absolute;
@@ -54,8 +69,8 @@ body{
 }
 
 #year-hero{
-    color: rgba(255, 255, 255, 0.511);
-    
+    color: var(--text-color);
+    opacity: 0.9;
     font-size: 18px;
     position: absolute;
     display: block;
@@ -66,15 +81,15 @@ body{
 
 #daily-notify{
     width: 360px;
-    background-color: rgba(192, 57, 47, 0.676);
+    background-color:var(--tri-color);
     position: absolute;
     top: 220px;
     right: 20px;
     padding: 8px 18px;
     border-radius: 10px;
-    color: rgba(255, 255, 255, 0.765);
+    color: var(--text-color);
     font-size: 12px ;
-    opacity: 0.9;
+    opacity: 1;
     animation: notify 2s ease-in-out;
 }
 
@@ -93,6 +108,7 @@ body{
 .notify-cancel-btn{
    display: grid;
    place-content: center; 
+   cursor: pointer;
 }
 
 .control{
@@ -103,6 +119,7 @@ body{
     padding: 80px 100px;
     color: brown;
     width: 25%;
+    z-index: 10;
 }
 
 #create-entry{
@@ -111,14 +128,18 @@ body{
     flex-direction: row;
     gap: 8px;
     padding: 8px;
-    color:rgba(255, 255, 255, 0.534); 
+    background-color:var(--tri-color);
+    border-radius: 10px;
+    color: var(--high-text);
     cursor: pointer;
+    transition: transform 0.2s ease-in;
 }
 
 #create-entry:hover{
-    background-color:#3E1F28;
+    background-color:var(--tri-color);
     border-radius: 10px;
-    color: rgb(255, 255, 255);
+    color:white;
+    transform: scale(1.1);
 }
 
 .scrolled{
@@ -165,8 +186,10 @@ body{
 
 #entry-date{
     font-family: var(--main-font);
-    color: white;
+    color:var(--text-color);
     margin-bottom: 20px;
+    font-size: 16px;
+    margin-right: auto;
 }
 
 .entry-field{
@@ -180,8 +203,8 @@ body{
 #entry-title{
     width: 100%;
     height: 2rem;    
-    color: white;
-    font-size: 1.2em;    
+    color: rgb(255, 255, 255);
+    font-size: 1.4em;    
     padding: 20px;
 }
 
@@ -241,8 +264,8 @@ body{
     position: absolute;
     bottom: 20px;
     right: 30px;
-    background-color: rgb(78, 12, 12);
-    color: rgba(255, 255, 255, 0.909);
+    background-color: var(--tri-color);
+    color: var(--text-color);
     border: none;
     padding: 10px 20px;
     border-radius: 10px;
@@ -250,8 +273,8 @@ body{
     
 }
 #submit:hover{
-    background-color: rgb(97, 11, 11);
-    color: white;
+    background-color: #4c078b;;
+    color: #d192f3;
 }
 
 #entries-grid {
@@ -259,6 +282,7 @@ body{
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 20px;
     padding: 20px;
+    z-index: 120;
 }
 
 .entry-item {
@@ -271,6 +295,7 @@ body{
     opacity: 0.875;
     transition: opacity 0.2s ease;
     cursor: pointer;
+    z-index: 60;
 }
 
 .entry-item:hover{
@@ -292,23 +317,26 @@ body{
 .entry-title {
     font-weight: bold;
     font-family: var(--main-font);
+    color:rgba(255, 255, 255, 0.868);
     font-size: 16px;
     max-width: 68%;
 }
 
 .entry-date{
     font-size: 12px;
-    color: #ddddddba;
+    color:var(--high-text);
     font-family: var(--main-font);
     width: 32%;
 }
 
 .entry-content {
     width: 80%;
-    color: #ddddddda;
+    color: var(--gray-color1);
+    font-family: var(--tri-font);
+    line-height: 15px;
     font-size: 16px;
     display: -webkit-box;
-    -webkit-line-clamp: 2; /* Number of lines to show */
+    -webkit-line-clamp: 1; /* Number of lines to show */
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -341,7 +369,7 @@ body{
 }
 
 .scroll-to-top-btn svg:hover{
-    color: var(--sec-color);
+    color: var(--text-color);
 }
 
 #entry-details-pane {
@@ -374,12 +402,13 @@ body{
     position: absolute;
     top: 20px;
     right: 20px;
-    color: rgba(255, 255, 255, 0.799);
+    color: var(--high-text);
     font-family: var(--main-font);
 }
 
 #close-pane{
     position: absolute;
+    color: var(--text-color);
     top: 20px;
     left: 20px;
     background-color: transparent;
@@ -423,11 +452,26 @@ body{
     display: grid; /* Show when visible */
 }
 
-.hidden {
-    display: none;
+
+#hero {
+    z-index: 100;
 }
 
+#daily-notify {
+    z-index: 100;
+}
 
+#form {
+    z-index: 120;
+}
+
+#entry-details-pane {
+    z-index: 1000;
+}
+
+.scroll-to-top-btn {
+    z-index: 100;
+}
 
 
 
@@ -466,12 +510,14 @@ body{
         left: 20px; /* Adjust left alignment */
         top: 60px;
     }
-
- 
     #create-entry{
-        background-color:#3E1F28;
+        color:var(--high-text);
+    }
+ 
+    #create-entry:active{
         border-radius: 10px;
-        color: rgb(255, 255, 255);
+        color: var(--high-text);
+        transform: scale(1.2);
     }
 
     #year-hero {
@@ -556,6 +602,7 @@ body{
 
     .entry-item {
         padding: 10px;
+        z-index: 3;
         font-size: 14px;
         display: flex;
         flex-direction: column;
@@ -574,7 +621,9 @@ body{
     .entry-date {
         width: 100%;
         margin-top:10px ;
-        color: rgba(255, 255, 255, 0.689);
+        color: var(--high-text);
+        font-size: 16px;
+        opacity: 0.9;
     }
 
     .entry-content {
