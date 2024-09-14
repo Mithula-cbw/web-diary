@@ -1,0 +1,46 @@
+
+:root{
+    --bg-color : white;
+    --text-color : black;
+    --prim-color : #1D0042;
+    --acc1-color : #370554;
+    --acc2-color : #00DAFC;
+    --acc3-color : #D280FF;
+    --acc4-color : #420D73;
+    --acc5-color : #B01DA6;
+}
+
+[data-theme="dark"] {
+    --bg-color :  #1D0042;
+    --text-color : #D280FF;
+    --prim-color : #00DAFC;
+
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    width: 100%;
+    padding: 0;
+    background-color: #1D0042;
+    color: #D280FF;
+}
+
+.hero{
+    width: 100%;
+    height: 300px;
+    background-color: #370554;
+}
+
+.container{
+    display: flex;
+    flex-direction: row;
+    ali
+    width: 70%;
+    margin: auto;
+    padding: 40px 80px;
+}
