@@ -43,6 +43,11 @@ formClose.addEventListener("click", () => {
     }
 });
 
+const updateFormDate = () => {
+    const entryDate = document.getElementById('entry-date');
+    entryDate.textContent = `${currentDay} ${months[currentMonth]} ${currentYear}`;
+};
+
 function renderStars(rating) {
     let starsHtml = '';
     for (let i = 1; i <= 5; i++) {
@@ -66,6 +71,27 @@ function showEntryDetails(entry) {
     entryDetailsPane.classList.add('visible');
     entryRatingElem.innerHTML = renderStars(entry.moodRating);
 }
+
+// window.addEventListener('DOMContentLoaded', () => {
+//     const heroBanner = document.getElementById('hero');
+    
+//     // Array of image URLs for the banners
+//     const banners = [
+//         'url(/img/hero-banner1.jpg)',
+//         // 'url(/img/hero-banner2.jpg)',
+//         // 'url(/img/hero-banner3.jpg)',
+//         'url(/img/hero-banner4.jpg)'
+//     ];
+    
+//     // Generate a random index to select a background
+//     const randomIndex = Math.floor(Math.random() * banners.length);
+    
+//     // Apply the random background image
+//     heroBanner.style.background = `
+// linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+//        ${banners[randomIndex]} no-repeat center center;`;
+// });
+
 
 
 const resetForm = () => {
@@ -111,7 +137,8 @@ document.addEventListener('scroll', () => {
 
 createEntry.addEventListener('click', () => {
     toggleHiddenElement(form);
-    document.getElementById('mood-color').value = '#000000';
+    updateFormDate();
+    
 });
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -176,11 +203,11 @@ function addEntryToGrid(entry) {
     entryItem.setAttribute('id', entry.id);
 
     const gradients = [
-        'linear-gradient(to right, rgba(255, 165, 0, 0.8) 0%, rgba(0, 0, 0, 0.8) 110%)', // 1 star (Orange to White)
-        'linear-gradient(to right, rgba(255, 215, 128, 0.8) 0%, rgba(0, 0, 0, 0.8) 110%)', // 2 stars (Light Orange to Light White)
-        'linear-gradient(to right, rgba(185, 251, 192, 0.8) 0%, rgba(0, 0, 0, 0.8) 110%)', // 3 stars (Light Green to Light White)
-        'linear-gradient(to right, rgba(185, 251, 192, 0.8) 0%, rgba(0, 0, 0, 0.8) 110%)', // 4 stars (Light Green to Green)
-        'linear-gradient(to right, rgba(76, 175, 80, 0.8) 0%, rgba(0, 0, 0, 0.8) 110%)'  // 5 stars (Green to White)
+        'linear-gradient(to right, rgba(255, 165, 0, 0.8) 0%, rgba(0, 0, 0, 0.5) 110%)', // 1 star (Orange to White)
+        'linear-gradient(to right, rgba(255, 215, 128, 0.8) 0%, rgba(0, 0, 0, 0.5) 110%)', // 2 stars (Light Orange to Light White)
+        'linear-gradient(to right, rgba(185, 251, 192, 0.8) 0%, rgba(0, 0, 0, 0.5) 110%)', // 3 stars (Light Green to Light White)
+        'linear-gradient(to right, rgba(185, 251, 192, 0.8) 0%, rgba(0, 0, 0, 0.5) 110%)', // 4 stars (Light Green to Green)
+        'linear-gradient(to right, rgba(76, 175, 80, 0.8) 0%, rgba(0, 0, 0, 0.5) 110%)'  // 5 stars (Green to White)
     ];
 
     const gradient = gradients[entry.moodRating - 1] || gradients[0];
