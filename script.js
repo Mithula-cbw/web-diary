@@ -100,6 +100,7 @@ const updateDate = () => {
 };
 
 window.addEventListener('DOMContentLoaded', () => {
+    updateDate();
     const storedEntries = localStorage.getItem('diaryEntries');
     if (storedEntries) {
         const data = JSON.parse(storedEntries);
