@@ -13,10 +13,10 @@
 }
 
 /* :root{
-    --bg-color: #3b0b15;
+    --bg-color:#180161;
     --sec-color: rgb(207, 52, 52);
-    --tri-color:#d94a51;
-    --text-color: #fbb42f;
+    --tri-color:#4F1787;
+    --text-color: #FB773C;
     --high-text:white;
     --main-font: "Space Grotesk" ,sans-serif;
 } */
@@ -51,7 +51,7 @@ body{
     height: 280px;
     background: 
         linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
-        url(/img/hero-banner1.jpg) no-repeat center center;
+        url(/img/hero-banner5.jpg) no-repeat center center;
     background-size: cover;
     background-position: center;
     background-color: var(--bg-color);
@@ -538,7 +538,7 @@ body{
 
     /* Hero section adjustments */
     #hero {
-        height: 200px; /* Smaller hero section */
+        height: 250px; /* Smaller hero section */
     }
 
     #date-hero {
