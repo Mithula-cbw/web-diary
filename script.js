@@ -48,6 +48,21 @@ const updateFormDate = () => {
     entryDate.textContent = `${currentDay} ${months[currentMonth]} ${currentYear}`;
 };
 
+function refreshEntriesGrid() {
+    const entriesGrid = document.getElementById('entries-grid');
+    entriesGrid.innerHTML = '';
+    
+    let prevEntry = null;
+
+    data.forEach((entry, index) => {
+        if (index > 0) {
+            prevEntry = data[index - 1];
+            addDayBanner(entry, prevEntry);
+        }
+        addEntryToGrid(entry);
+    });
+}
+
 function renderStars(rating) {
     let starsHtml = '';
     for (let i = 1; i <= 5; i++) {
@@ -72,28 +87,6 @@ function showEntryDetails(entry) {
     entryRatingElem.innerHTML = renderStars(entry.moodRating);
 }
 
-// window.addEventListener('DOMContentLoaded', () => {
-//     const heroBanner = document.getElementById('hero');
-    
-//     // Array of image URLs for the banners
-//     const banners = [
-//         'url(/img/hero-banner1.jpg)',
-//         // 'url(/img/hero-banner2.jpg)',
-//         // 'url(/img/hero-banner3.jpg)',
-//         'url(/img/hero-banner4.jpg)'
-//     ];
-    
-//     // Generate a random index to select a background
-//     const randomIndex = Math.floor(Math.random() * banners.length);
-    
-//     // Apply the random background image
-//     heroBanner.style.background = `
-// linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
-//        ${banners[randomIndex]} no-repeat center center;`;
-// });
-
-
-
 const resetForm = () => {
     entryTitle.value = '';
     entryContent.value = ''; 
@@ -106,14 +99,25 @@ const updateDate = () => {
     heroYear.innerText = `${currentYear}`;
 };
 
-window.addEventListener('DOMContentLoaded', (event) => {
-    updateDate();
-    // Load entries from localStorage on page load
-    data.forEach(entry => addEntryToGrid(entry));
+window.addEventListener('DOMContentLoaded', () => {
+    const storedEntries = localStorage.getItem('diaryEntries');
+    if (storedEntries) {
+        const data = JSON.parse(storedEntries);
+        
+        data.forEach((entry, index) => {
+            let prevEntry = null;
+            
+            if (index > 0) {
+                prevEntry = data[index - 1];
+            }
+            
+            addDayBanner(entry, prevEntry);
+            addEntryToGrid(entry);
+        });
+    }
 });
 
 closePaneBtn.addEventListener('click', () => {
-
     closePaneBtn.style.transform = 'scale(0.8)';
     
     setTimeout(() => {
@@ -124,7 +128,6 @@ closePaneBtn.addEventListener('click', () => {
         entryDetailsPane.classList.remove('visible');
     }, 500); 
 });
-
 
 document.addEventListener('scroll', () => {
     const target = document.getElementById('create-entry');
@@ -138,7 +141,6 @@ document.addEventListener('scroll', () => {
 createEntry.addEventListener('click', () => {
     toggleHiddenElement(form);
     updateFormDate();
-    
 });
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -146,15 +148,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const resizeTextarea = (event) => {
         const target = event.target;
-        target.style.height = 'auto'; // Reset height to get the scroll height
-        // Ensure the height does not exceed max-height
-        target.style.height = `${Math.min(target.scrollHeight, 400)}px`; // Adjust max height to match CSS max-height
+        target.style.height = 'auto';
+        target.style.height = `${Math.min(target.scrollHeight, 400)}px`;
     };
 
     textarea.addEventListener('input', resizeTextarea);
 });
-
-
 
 function saveEntry() {
     if (entryTitle.value.trim() === "") {
@@ -167,12 +166,14 @@ function saveEntry() {
             "date": `${currentDay} ${months[currentMonth]} ${currentYear}`,
             "entryTitle": capitalizeFirstLetter(entryTitle.value.trim()),
             "entryData": entryContent.value,
-            "moodRating": selectedMoodRating
+            "moodRating": selectedMoodRating,
+            "month": currentDay
         };
 
-        data.push(entry);
+        data.unshift(entry);
         localStorage.setItem('diaryEntries', JSON.stringify(data));
         addEntryToGrid(entry);
+        refreshEntriesGrid();
         resetForm();
         toggleHiddenElement(form);
     }
@@ -197,51 +198,53 @@ function updateStars() {
     });
 }
 
+function addDayBanner(entry, prevEntry) {
+    if (prevEntry != null) {
+        const [entryDay, entryMonth, entryYear] = entry.date.split(' ');
+        const [prevEntryDay, prevEntryMonth, prevEntryYear] = prevEntry.date.split(' ');
+
+        if (entryMonth !== prevEntryMonth || entryYear !== prevEntryYear) {
+            const monthBanner = document.createElement('div');
+            monthBanner.classList.add('day-banner');
+
+            const monthChangedText = `${entryMonth} ${entryYear}`;
+            monthBanner.innerHTML = `
+                <div class="day-banner-text">${monthChangedText}</div>
+            `;
+
+            document.querySelector('#entries-grid').appendChild(monthBanner);
+        }
+    }
+}
+
 function addEntryToGrid(entry) {
     const entryItem = document.createElement('div');
     entryItem.classList.add('entry-item');
     entryItem.setAttribute('id', entry.id);
 
     const gradients = [
-        'linear-gradient(to right, rgba(255, 165, 0, 0.8) 0%, rgba(0, 0, 0, 0.5) 110%)', // 1 star (Orange to White)
-        'linear-gradient(to right, rgba(255, 215, 128, 0.8) 0%, rgba(0, 0, 0, 0.5) 110%)', // 2 stars (Light Orange to Light White)
-        'linear-gradient(to right, rgba(185, 251, 192, 0.8) 0%, rgba(0, 0, 0, 0.5) 110%)', // 3 stars (Light Green to Light White)
-        'linear-gradient(to right, rgba(185, 251, 192, 0.8) 0%, rgba(0, 0, 0, 0.5) 110%)', // 4 stars (Light Green to Green)
-        'linear-gradient(to right, rgba(76, 175, 80, 0.8) 0%, rgba(0, 0, 0, 0.5) 110%)'  // 5 stars (Green to White)
+        'linear-gradient(to right, rgba(255, 165, 0, 0.8) 0%, rgba(0, 0, 0, 0.2) 5%, #420D73 110%)',
+        'linear-gradient(to right, rgba(255, 215, 128, 0.8) 0%, rgba(0, 0, 0, 0.2) 5%, #420D73 110%)',
+        'linear-gradient(to right, rgba(185, 251, 192, 0.8) 0%, rgba(0, 0, 0, 0.2) 5%, #420D73 110%)',
+        'linear-gradient(to right, rgba(185, 251, 192, 0.8) 0%, rgba(0, 0, 0, 0.2) 5%, #420D73 110%)',
+        'linear-gradient(to right, rgba(76, 175, 80, 0.8) 0%, rgba(0, 0, 0, 0.2) 5% , #420D73 110%)'
     ];
 
     const gradient = gradients[entry.moodRating - 1] || gradients[0];
     entryItem.style.background = gradient;
-    const truncatedTitle = entry.entryTitle.length > 16? entry.entryTitle.substring(0, 16) + '...' : entry.entryTitle;
+    const truncatedTitle = entry.entryTitle.length > 16 ? entry.entryTitle.substring(0, 16) + '...' : entry.entryTitle;
 
     entryItem.innerHTML = `
         <div class="entry-div">
-        <p class="entry-title">${truncatedTitle}</p>
-        <p class="entry-date">${entry.date}</p>
+            <p class="entry-title">${truncatedTitle}</p>
+            <p class="entry-date">${entry.date}</p>
         </div>
         <p class="entry-content">${entry.entryData}</p>
-        
     `;
     
     entryItem.addEventListener('click', () => {
         showEntryDetails(entry);
     });
 
-    document.getElementById('entries-grid').appendChild(entryItem);
+    document.querySelector('#entries-grid').appendChild(entryItem);
 }
-
-const scrollToTopBtn = document.getElementById('scroll-to-top-btn');
-
-
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 150) { // Show button after scrolling down 300px
-        scrollToTopBtn.classList.add('visible');
-    } else {
-        scrollToTopBtn.classList.remove('visible');
-    }
-});
-
-
-scrollToTopBtn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-});
