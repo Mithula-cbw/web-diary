@@ -231,7 +231,7 @@ body{
     height: 200px;
     width: 400px;
     color: white;
-    background-color: rgb(59, 59, 59);
+    background-color:var(--bg-color-opp);
     z-index: 1200;
     border-radius: 20px;
 }
@@ -242,10 +242,10 @@ body{
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    background-color:var(--bg-dark);
+    background-color:var(--tri-color);
     border-radius: 20px 20px 0 0 ;
     padding: 10px 20px;
-    color: rgba(216, 216, 216, 0.868);
+    color: var(--high-text);
     font-family: var(--tri-font);
 }
 
@@ -259,7 +259,7 @@ body{
     margin: 0 0 0 25px;
     font-family: var(--tri-font);
     font-size: 18px;
-    color: var(--text-color);
+    color: var(--high-text);
 }
 
 .danger-format svg{
@@ -281,7 +281,7 @@ body{
 
 .danger-btns > button{
     padding: 5px 15px;
-    background-color: green;
+    background-color:rgba(76, 175, 80, 0.8);
     border: none;
     border-radius: 10px;
     color: var(--high-text);
@@ -297,7 +297,7 @@ body{
 }
 
 .danger-btns > button:hover{
-    background-color:  rgb(14, 82, 14);
+    background-color:  rgba(76, 175, 79, 0.586);
 }
 
 
@@ -899,7 +899,7 @@ background: var(--bg-color-op);
 
     #nav-menu {
         width: 80%;
-        background-color: var(--bg-color-oppphg);
+        background-color: var(--bg-color-oppp);
     }
 
     
@@ -936,6 +936,32 @@ background: var(--bg-color-op);
         width: 40px; /* Smaller icon */
         height: 40px;
     }
+
+
+    
+#format-confirm{
+    justify-content: space-evenly;
+    top: calc(50% - 50px);
+    left: calc(50% - 150px);
+    width: 300px;
+    
+}
+
+
+.danger-format{
+    gap: 20px;
+    width: 80%;
+    margin: 0 0 0 25px;
+    font-family: var(--tri-font);
+    font-size: 16px;
+    color: var(--text-color);
+}
+
+.danger-format svg{
+    width: 40px;
+    height: 40px;
+    fill: rgb(220, 53, 69);
+}
 }
 
 
