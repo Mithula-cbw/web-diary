@@ -17,6 +17,7 @@
     --bg-color-op:#2e152d5d;
     --bg-color-opp:#2e152dd3;
     --bg-color-oppp:#2e152de3;
+    --bg-dark: rgba(39, 18, 39, 0.879);
     --sec-color: rgb(207, 52, 52);
     --warning-color:rgba(206, 151, 62, 0.798);
     --tri-color:#926290;
@@ -102,7 +103,7 @@ body{
 }
 
 .hide{
-    display: none;
+    display: none !important;
 }
 
 #inner-nav{
@@ -218,6 +219,87 @@ body{
     transition: 0.1s ease-in;
     
 }
+
+#format-confirm{
+    position: absolute;
+    display: flex;
+    flex-direction:column ;
+    justify-content: flex-start;
+    align-items: center;
+    top: calc(50% - 100px);
+    left: calc(50% - 200px);
+    height: 200px;
+    width: 400px;
+    color: white;
+    background-color: rgb(59, 59, 59);
+    z-index: 1200;
+    border-radius: 20px;
+}
+
+.format-confirm-title{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color:var(--bg-dark);
+    border-radius: 20px 20px 0 0 ;
+    padding: 10px 20px;
+    color: rgba(216, 216, 216, 0.868);
+    font-family: var(--tri-font);
+}
+
+.danger-format{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 20px;
+    width: 80%;
+    margin: 0 0 0 25px;
+    font-family: var(--tri-font);
+    font-size: 18px;
+    color: var(--text-color);
+}
+
+.danger-format svg{
+    width: 120px;
+    height: 120px;
+    fill: rgb(220, 53, 69);
+}
+
+.danger-btns{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding-right: 30px;
+    align-items: center;
+    gap: 10px;
+    
+}
+
+.danger-btns > button{
+    padding: 5px 15px;
+    background-color: green;
+    border: none;
+    border-radius: 10px;
+    color: var(--high-text);
+    cursor: pointer;
+}
+
+#format-btn{
+    background-color: rgb(220, 53, 69);
+}
+
+#format-btn:hover{
+    background-color: rgb(130, 22, 33);
+}
+
+.danger-btns > button:hover{
+    background-color:  rgb(14, 82, 14);
+}
+
 
 
 #daily-notify{
@@ -817,7 +899,7 @@ background: var(--bg-color-op);
 
     #nav-menu {
         width: 80%;
-        background-color: var(--bg-color-oppp);
+        background-color: var(--bg-color-oppphg);
     }
 
     

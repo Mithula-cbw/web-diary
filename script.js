@@ -5,7 +5,7 @@ const heroYear = document.getElementById('year-hero');
 const createEntry = document.getElementById('create-entry');
 const form = document.getElementById('form');
 const formClose = document.getElementById('form-cancel-btn');
-const data = JSON.parse(localStorage.getItem('diaryEntries')) || [];
+let  data = JSON.parse(localStorage.getItem('diaryEntries')) || [];
 const submitForm = document.getElementById("submit");
 const entryTitle = document.getElementById("entry-title");
 const entryContent = document.getElementById("entry-content");
@@ -13,7 +13,11 @@ const moodRatingContainer = document.getElementById('mood-rating');
 const navMenuToggleBtn = document.querySelectorAll(".navMenuToggleBtn");
 const navMenu = document.getElementById("nav-menu");
 
-
+//nav
+const formatDiaryBtn = document.getElementById('format-diary');
+const formatCancelBtn = document.querySelectorAll('.format-cancel-btn');
+const formatConfirm = document.getElementById('format-confirm');
+const formatBtn = document.getElementById('format-btn');
 const entryDetailsPane = document.getElementById('entry-details-pane');
 const paneEntryTitle = document.getElementById('pane-entry-title');
 const paneEntryDate = document.getElementById('pane-entry-date');
@@ -37,6 +41,31 @@ notifyCancelBtn.addEventListener("click", () => {
     dailyNotify.remove();
 });
 
+
+function formatDiary() {
+    const entriesGrid = document.getElementById('entries-grid');
+    localStorage.removeItem('diaryEntries');
+    data = [];
+    localStorage.setItem('diaryEntries', JSON.stringify(data));
+    entriesGrid.innerHTML = '';
+}
+
+formatDiaryBtn.addEventListener("click", () => {
+    hideStuffs(formatConfirm);
+    navMenu.classList.toggle('visibleMenu');
+    opacityOfNotify(navMenu);
+});
+
+formatBtn.addEventListener("click", formatDiary);
+
+
+formatCancelBtn.forEach((btn) =>{
+    btn.addEventListener("click" ,()=>{
+        hideStuffs(formatConfirm);
+    })
+});
+
+
 formClose.addEventListener("click", () => {
     if (entryTitle.value === "" && entryContent.value === "") {
         form.classList.add("hidden");
@@ -50,14 +79,18 @@ formClose.addEventListener("click", () => {
 });
 
 
+function opacityOfNotify(ele){
+    if(ele.classList.contains('visibleMenu')){
+        dailyNotify.style.opacity = "0.5";
+    }else{
+        dailyNotify.style.opacity = "1";
+    }
+}
+
 navMenuToggleBtn.forEach((btn) => {
     btn.addEventListener("click", () => {
         navMenu.classList.toggle("visibleMenu");
-        if(navMenu.classList.contains('visibleMenu')){
-            dailyNotify.style.opacity = "0.5";
-        }else{
-            dailyNotify.style.opacity = "1";
-        }
+        opacityOfNotify(navMenu);
     });
 });
 
