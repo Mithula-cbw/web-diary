@@ -1,8 +1,8 @@
-:root{
+/* :root{
     --bg-color: #1D0042;
     --sec-color: rgb(207, 52, 52);
     --tri-color:#420D73;
-    --text-color: #c075e9;
+    --text-color: #d69df5;
     --text2-color: #d17cffc3;
     --high-text:rgba(255, 255, 255, 0.721);
     --gray-color1:rgba(255, 255, 255, 0.742);
@@ -10,16 +10,17 @@
     --main-font: "Space Grotesk" ,sans-serif;
     --sec-font: "Dancing Script" ,sans-serif;    
     --tri-font: "Zain" ,sans-serif;
-}
-
-/* :root{
-    --bg-color:#180161;
-    --sec-color: rgb(207, 52, 52);
-    --tri-color:#4F1787;
-    --text-color: #FB773C;
-    --high-text:white;
-    --main-font: "Space Grotesk" ,sans-serif;
 } */
+
+:root{
+    --bg-color:#4A2748;
+    --bg-color-op:#2e152d5d;
+    --sec-color: rgb(207, 52, 52);
+    --tri-color:#926290;
+    --text-color: #F3DFCD;
+    --high-text:#eee2df;
+    --main-font: "Space Grotesk" ,sans-serif;
+}
 
 
 
@@ -51,7 +52,7 @@ body{
     height: 280px;
     background: 
         linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
-        url(hero-banner5.jpg) no-repeat center center;
+        url(/img/hero-banner5.jpg) no-repeat center center;
     background-size: cover;
     background-position: center;
     background-color: var(--bg-color);
@@ -110,6 +111,7 @@ body{
 .notify-cancel-btn{
    display: grid;
    place-content: center; 
+   transform: scale(1.5);
    cursor: pointer;
 }
 
@@ -119,7 +121,6 @@ body{
     top: 100px;
     bottom: 0;
     padding: 80px 100px;
-    color: brown;
     width: 25%;
     z-index: 10;
 }
@@ -140,12 +141,12 @@ body{
 #create-entry:hover{
     background-color:var(--tri-color);
     border-radius: 10px;
-    color:white;
+    color: var(--high-text);
     transform: scale(1.1);
 }
 
 .scrolled{
-    color: rgb(255, 255, 255) !important;
+    color: var(--high-text) !important;
 }
 
 .content{
@@ -155,7 +156,7 @@ body{
 }
 
 #form{
- background-color: #09030584;
+background: var(--bg-color-op);
  position: fixed;
  top: 0;
  left: 0;
@@ -167,7 +168,7 @@ body{
 
 #form-cancel-btn{
     position: absolute;
-    color: white;
+    color:  var(--high-text);
     top: 30px;
     right: 30px;
     transform: scale(2);
@@ -197,7 +198,7 @@ body{
 .entry-field{
     background-color: transparent;
     border: none;
-    color: white;
+    color:  var(--high-text);
     /* font-size: 1.2em;
     cursor: pointer; */
 }
@@ -205,7 +206,7 @@ body{
 #entry-title{
     width: 100%;
     height: 2rem;    
-    color: rgb(255, 255, 255);
+    color: var(--text-color);
     font-size: 1.4em;    
     padding: 20px;
 }
@@ -213,7 +214,7 @@ body{
 #entry-content{
     width: 100%;
     height: auto;    
-    color: white;
+    color:  var(--high-text);
     font-size: 1.2em;
     font-family: var(--main-font);
     padding: 20px;
@@ -275,8 +276,7 @@ body{
     
 }
 #submit:hover{
-    background-color: #4c078b;;
-    color: #d192f3;
+    background-color: #4c078b;
 }
 
 #entries-grid {
@@ -288,7 +288,6 @@ body{
 }
 
 .entry-item {
-    background-color: #0b0202;
     border: none;
     padding: 15px 25px;   
     border-radius: 8px;
@@ -357,7 +356,7 @@ body{
     font-size: 14px;
     font-weight: bold;
     z-index: 60;
-    color: #cfcfcf;     
+    color:var(--high-text);     
     font-family: var(--main-font);
     letter-spacing: 4px;
     margin-bottom: 10px; /* Optional margin for spacing */
@@ -374,6 +373,7 @@ body{
     opacity: 0; 
     visibility: hidden;
     transition: opacity 1s ease;
+    z-index: 80;
     
 
 }
@@ -386,7 +386,7 @@ body{
 }
 
 .scroll-to-top-btn svg{
-    color: white;
+    color:  var(--high-text);
 }
 
 .scroll-to-top-btn svg:hover{
@@ -436,7 +436,7 @@ body{
 
 #close-pane{
     position: absolute;
-    color: white;
+    color:  var(--high-text);
     top: 20px;
     left: 20px;
     background-color: transparent;
@@ -450,7 +450,7 @@ body{
     position: absolute;
     top: 80px;
     left: 30px;
-    color: white;
+    color:  var(--high-text);
     font-family: var(--main-font);
     font-size: 22px;
     
@@ -482,7 +482,7 @@ body{
 
 #close-pane svg{
 
-    fill: white;
+    fill:  var(--high-text);
 }
 #entry-details-pane.visible {
     display: grid; /* Show when visible */
@@ -621,7 +621,7 @@ body{
 
     #form-cancel-btn{
         position: absolute;
-        color: white;
+        color:  var(--high-text);
         top: 30px;
         right: 30px;
         transform: scale(2.5);
