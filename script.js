@@ -10,6 +10,9 @@ const submitForm = document.getElementById("submit");
 const entryTitle = document.getElementById("entry-title");
 const entryContent = document.getElementById("entry-content");
 const moodRatingContainer = document.getElementById('mood-rating');
+const navMenuToggleBtn = document.querySelectorAll(".navMenuToggleBtn");
+const navMenu = document.getElementById("nav-menu");
+
 
 const entryDetailsPane = document.getElementById('entry-details-pane');
 const paneEntryTitle = document.getElementById('pane-entry-title');
@@ -44,6 +47,18 @@ formClose.addEventListener("click", () => {
             toggleHiddenElement(form);
         }
     }
+});
+
+
+navMenuToggleBtn.forEach((btn) => {
+    btn.addEventListener("click", () => {
+        navMenu.classList.toggle("visibleMenu");
+        if(navMenu.classList.contains('visibleMenu')){
+            dailyNotify.style.opacity = "0.5";
+        }else{
+            dailyNotify.style.opacity = "1";
+        }
+    });
 });
 
 const updateFormDate = () => {
@@ -139,10 +154,18 @@ document.addEventListener('scroll', () => {
     }
 });
 
+const hideStuffs = (ele) =>{
+    ele.classList.toggle('hide');
+};
+
+
 document.addEventListener('scroll', () => {
      if (window.scrollY > 150) {
+        hideStuffs(dailyNotify);
         scrollUp.classList.add('visible');
     } else {
+        
+        hideStuffs(dailyNotify);
         scrollUp.classList.remove('visible');
     }
 });
