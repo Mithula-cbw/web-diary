@@ -18,6 +18,8 @@ const paneEntryContent = document.getElementById('pane-entry-content');
 const closePaneBtn = document.getElementById('close-pane');
 const entryRatingElem = entryDetailsPane.querySelector('.entry-rating');
 let selectedMoodRating = 3;
+const scrollUp = document.getElementById('scroll-to-top-btn');
+   
 
 const currentDate = new Date();
 const months = [
@@ -38,6 +40,7 @@ formClose.addEventListener("click", () => {
     } else {
         const confirmation = confirm("Are you sure you want to close without saving?");
         if (confirmation) {
+            resetForm();
             toggleHiddenElement(form);
         }
     }
@@ -99,6 +102,8 @@ const updateDate = () => {
     heroYear.innerText = `${currentYear}`;
 };
 
+
+
 window.addEventListener('DOMContentLoaded', () => {
     updateDate();
     const storedEntries = localStorage.getItem('diaryEntries');
@@ -120,14 +125,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
 closePaneBtn.addEventListener('click', () => {
     closePaneBtn.style.transform = 'scale(0.8)';
-    
-    setTimeout(() => {
-        closePaneBtn.style.transform = 'scale(2)';
-    }, 200); 
-    
-    setTimeout(() => {
+        resetForm();
         entryDetailsPane.classList.remove('visible');
-    }, 500); 
+  
 });
 
 document.addEventListener('scroll', () => {
@@ -138,6 +138,23 @@ document.addEventListener('scroll', () => {
         target.classList.remove('scrolled');
     }
 });
+
+document.addEventListener('scroll', () => {
+     if (window.scrollY > 150) {
+        scrollUp.classList.add('visible');
+    } else {
+        scrollUp.classList.remove('visible');
+    }
+});
+
+scrollUp.addEventListener("click", () => {
+    window.scrollTo({
+        top: 0, // Scroll to the top of the page
+        behavior: 'smooth' // Smooth scroll effect
+    })
+});
+
+
 
 createEntry.addEventListener('click', () => {
     toggleHiddenElement(form);
@@ -155,6 +172,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     textarea.addEventListener('input', resizeTextarea);
 });
+
+
 
 function saveEntry() {
     if (entryTitle.value.trim() === "") {
@@ -224,11 +243,11 @@ function addEntryToGrid(entry) {
     entryItem.setAttribute('id', entry.id);
 
     const gradients = [
-        'linear-gradient(to right, rgba(255, 165, 0, 0.8) 0%, rgba(0, 0, 0, 0.2) 5%, #420D73 110%)',
-        'linear-gradient(to right, rgba(255, 215, 128, 0.8) 0%, rgba(0, 0, 0, 0.2) 5%, #420D73 110%)',
-        'linear-gradient(to right, rgba(185, 251, 192, 0.8) 0%, rgba(0, 0, 0, 0.2) 5%, #420D73 110%)',
-        'linear-gradient(to right, rgba(185, 251, 192, 0.8) 0%, rgba(0, 0, 0, 0.2) 5%, #420D73 110%)',
-        'linear-gradient(to right, rgba(76, 175, 80, 0.8) 0%, rgba(0, 0, 0, 0.2) 5% , #420D73 110%)'
+        'linear-gradient(to right, rgba(255, 165, 0, 0.8) 0%, rgba(0, 0, 0, 0.2) 5%,  var(--bg-color) 110%)',
+        'linear-gradient(to right, rgba(255, 215, 128, 0.8) 0%, rgba(0, 0, 0, 0.2) 5%,  var(--bg-color) 110%)',
+        'linear-gradient(to right, rgba(185, 251, 192, 0.8) 0%, rgba(0, 0, 0, 0.2) 5%, var(--bg-color) 110%)',
+        'linear-gradient(to right, rgba(185, 251, 192, 0.8) 0%, rgba(0, 0, 0, 0.2) 5%, var(--bg-color) 110%)',
+        'linear-gradient(to right, rgba(76, 175, 80, 0.8) 0%, rgba(0, 0, 0, 0.2) 5% , var(--bg-color) 110%)'
     ];
 
     const gradient = gradients[entry.moodRating - 1] || gradients[0];
