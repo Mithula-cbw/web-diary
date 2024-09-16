@@ -16,6 +16,7 @@
     --bg-color:#4A2748;
     --bg-color-op:#2e152d5d;
     --bg-color-opp:#2e152dd3;
+    --bg-color-oppp:#2e152de3;
     --sec-color: rgb(207, 52, 52);
     --warning-color:rgba(206, 151, 62, 0.798);
     --tri-color:#926290;
@@ -65,7 +66,7 @@ body{
 #date-hero{
     color: var(--text-color);
     font-family: "Space Grotesk" ,sans-serif;
-    font-size: 40px;
+    font-size: 45px;
     position: absolute;
     display: block;
     top: 80px;
@@ -76,10 +77,10 @@ body{
 #year-hero{
     color: var(--text-color);
     opacity: 0.9;
-    font-size: 18px;
+    font-size: 20px;
     position: absolute;
     display: block;
-    top: 130px;
+    top: 135px;
     left: 125px;
     z-index: 100;
 }
@@ -139,8 +140,8 @@ body{
 
 .warning{
     position: relative;
-    width: calc(100% - 70px);
-    margin: 35px;
+    width: calc(100% - 40px);
+    margin: 40px 20px 20px 20px;
     padding:15px;    
     background-color:var(--high-text);
     border-left: solid 5px var(--warning-color);
@@ -174,7 +175,48 @@ body{
 
 #inner-nav ul{
     display: block;
+    padding: 10px 10px 10px 20px;
     width: calc(100% - 70px);
+    height: fit-content;
+    color: var(--text-color);
+    list-style: none;
+    font-family: var(--main-font);    
+
+}
+
+#inner-nav ul li{
+    width: 100%;
+    padding:10px 0;
+}
+
+.menu-item{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.menu-item:hover{
+    color: white;
+}
+
+.menu-item:hover .menu-item-svg{
+    color: white;
+    background-color: rgba(89, 89, 89, 0.746);
+
+}
+
+.menu-item-svg{
+    background-color: rgba(89, 89, 89, 0.583);
+    padding: 10px;
+    display: grid;
+    place-content: center;
+    border-radius: 50%;
+    color: var(--text-color);
+    transition: 0.1s ease-in;
+    
 }
 
 
@@ -183,7 +225,7 @@ body{
     background-color:var(--tri-color);
     position: absolute;
     top: 220px;
-    right: 35px;
+    right: 25px;
     padding: 8px 18px;
     border-radius: 10px;
     color: var(--text-color);
@@ -620,11 +662,11 @@ background: var(--bg-color-op);
     }
 
     80%{
-        right: 45px;
+        right: 35px;
     }
 
     100%{
-        right: 35px;
+        right: 25px;
     }
 }
 
@@ -684,7 +726,6 @@ background: var(--bg-color-op);
         background-color: rgba(0, 0, 0, 0.8); /* Add a background color for clarity */
     }
 
- 
 
     /* Main content adjustments */
     .content {
@@ -776,6 +817,7 @@ background: var(--bg-color-op);
 
     #nav-menu {
         width: 80%;
+        background-color: var(--bg-color-oppp);
     }
 
     
