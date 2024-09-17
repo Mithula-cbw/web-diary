@@ -32,6 +32,8 @@ const scrollUp = document.getElementById('scroll-to-top-btn');
 const search = document.getElementById("search");
 const searchDiaryBtn = document.getElementById("search-diary");
 const searchCancelBtn = document.getElementById("search-cancel-btn");
+const searchInput = document.getElementById('search-input');
+
 
 const currentDate = new Date();
 const months = [
@@ -76,14 +78,60 @@ formatCancelBtn.forEach((btn) =>{
 searchCancelBtn.addEventListener("click",()=>{
     search.classList.toggle("hide");    
     createEntry.disabled = false;
+    paintGridStart();
 });
 
 searchDiaryBtn.addEventListener('click', () => {
     hideStuffs(search);
     createEntry.disabled = true;
+    searchInput.focus();
     navMenu.classList.toggle('visibleMenu');
     opacityOfNotify(search);
+    searchInput.value = '';
 });
+
+function searchEntries(keyword){
+    const dataStored = localStorage.getItem('diaryEntries');
+    if (!dataStored) {
+        return [];
+    }
+
+    const dataStoredArr = JSON.parse(dataStored);
+
+     const searchResults = dataStoredArr.filter(entry => 
+        entry.entryTitle.toLowerCase().includes(keyword.toLowerCase()) || 
+        entry.entryData.toLowerCase().includes(keyword.toLowerCase()) 
+    );
+    
+    return searchResults;
+}
+
+
+// console.log(searchEntries("airforce"));
+searchInput.addEventListener("input", () => {
+    // setTimeout(() => {
+    //     alert("There was a letter");
+    // }, 2000); 
+    searchKeyword = searchInput.value;
+    const searchResults = searchEntries(searchKeyword);
+    const entriesGrid = document.getElementById('entries-grid');
+    entriesGrid.innerHTML ='';
+
+    if (searchResults.length > 0) {
+        searchResults.forEach((entry) => {
+            addEntryToGrid(entry);
+        });
+    } else {
+        entriesGrid.innerHTML = '<div class="no-item">--No results</div>';
+    }
+    
+    
+    
+
+});
+
+
+
 
 
 formClose.addEventListener("click", () => {
@@ -170,10 +218,9 @@ const updateDate = () => {
     heroYear.innerText = `${currentYear}`;
 };
 
-
-
-window.addEventListener('DOMContentLoaded', () => {
-    updateDate();
+function paintGridStart(){
+    const entriesGrid = document.getElementById('entries-grid');
+    entriesGrid.innerHTML ='';
     const storedEntries = localStorage.getItem('diaryEntries');
     if (storedEntries) {
         const data = JSON.parse(storedEntries);
@@ -189,10 +236,14 @@ window.addEventListener('DOMContentLoaded', () => {
             addEntryToGrid(entry);
         });
     }
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    updateDate();
+    paintGridStart();
 });
 
 closePaneBtn.addEventListener('click', () => {
-    closePaneBtn.style.transform = 'scale(0.8)';
         resetForm();
         entryDetailsPane.classList.remove('visible');
   
@@ -238,6 +289,9 @@ createEntry.addEventListener('click', () => {
     }
 
     toggleHiddenElement(form);
+    if(navMenu.classList.contains('visibleMenu')){
+        navMenu.classList.toggle('visibleMenu');
+    }    
     entryContent.focus();
     updateFormDate();
 });

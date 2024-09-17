@@ -408,6 +408,15 @@ body{
     color: rgb(0, 0, 0);
 }
 
+.no-item{
+    margin: auto;
+    font-style: italic;
+    font-family: var(--main-font);
+    font-size: 18px;
+    color: gray;
+    margin-top: 20px;
+    z-index: 1200;
+}
 
 
 #daily-notify{
@@ -750,7 +759,7 @@ background: var(--bg-color-op);
 
 #entry-details-pane {
     display: none; /* Hidden initially */
-    position: fixed;
+    position: absolute;
     top: 0;
     right: 0;
     left: 0;
@@ -763,13 +772,13 @@ background: var(--bg-color-op);
     width: 100%;
     height: 100vh;
     padding: 20px;
-    z-index: 1000;
+    z-index: 1500;
 }
 
 .pane-inside{
     position: relative;
    width: 50%;
-   min-height: 80%;
+   min-height: 100%;
    margin: auto; 
    background-color: rgba(0, 0, 0, 0.658);
 }
@@ -777,7 +786,7 @@ background: var(--bg-color-op);
 #pane-entry-date{
     position: absolute;
     top: 20px;
-    right: 20px;
+    left: 20px;
     color: var(--high-text);
     font-family: var(--main-font);
 }
@@ -786,7 +795,7 @@ background: var(--bg-color-op);
     position: absolute;
     color:  var(--high-text);
     top: 20px;
-    left: 20px;
+    right: 20px;
     background-color: transparent;
     border: none;
     transform: scale(2.2);
@@ -796,7 +805,7 @@ background: var(--bg-color-op);
 
 #pane-entry-title{
     position: absolute;
-    top: 80px;
+    top: 60px;
     left: 30px;
     color:  var(--high-text);
     font-family: var(--main-font);
@@ -809,20 +818,20 @@ background: var(--bg-color-op);
     position: absolute;
     
     margin-top: 20px;
-    top: 140px;
+    top: 120px;
     left: 30px;
     color: rgba(255, 255, 255, 0.922);
     font-family: var(--main-font);
     font-size: 18px;
-    max-height: 200px; /* Set the max height as per your design */
+    max-height: 60%; /* Set the max height as per your design */
     overflow-y: auto; /* Enable vertical scrolling */
-    padding-right: 10px; /* Optional: add padding for better readability */
+    padding-right: 20px; /* Optional: add padding for better readability */
     word-wrap: break-word;
 }
 
 .entry-rating{
     position: absolute;
-    bottom: 30px;
+    bottom: 20px;
     left: 30px;
     opacity: 0.8;
 }
@@ -849,9 +858,7 @@ background: var(--bg-color-op);
     z-index: 120;
 }
 
-#entry-details-pane {
-    z-index: 1000;
-}
+
 
 .scroll-to-top-btn {
     z-index: 100;
@@ -867,12 +874,27 @@ background: var(--bg-color-op);
     opacity: 0;
     }
 
-    80%{
+    90%{
         right: 35px;
     }
 
     100%{
         right: 25px;
+    }
+}
+
+@keyframes notifyMobile{
+    0%{
+    right:-400px;
+    opacity: 0;
+    }
+
+    95%{
+        right: 20px;
+    }
+    
+    100%{
+        right: 10px;
     }
 }
 
@@ -917,6 +939,7 @@ background: var(--bg-color-op);
         right: 10px;
         padding: 12px 18px;
         font-size: 16px;
+        animation: notifyMobile 2s ease-in-out;
     }
 
     .control {
@@ -1085,6 +1108,10 @@ background: var(--bg-color-op);
     width: 40px;
     height: 40px;
     fill: rgb(220, 53, 69);
+}
+
+#search{
+    min-height: 250px;
 }
 
 .inner-search{
