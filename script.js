@@ -26,7 +26,12 @@ const closePaneBtn = document.getElementById('close-pane');
 const entryRatingElem = entryDetailsPane.querySelector('.entry-rating');
 let selectedMoodRating = 3;
 const scrollUp = document.getElementById('scroll-to-top-btn');
-   
+ 
+
+//nav search
+const search = document.getElementById("search");
+const searchDiaryBtn = document.getElementById("search-diary");
+const searchCancelBtn = document.getElementById("search-cancel-btn");
 
 const currentDate = new Date();
 const months = [
@@ -48,6 +53,7 @@ function formatDiary() {
     data = [];
     localStorage.setItem('diaryEntries', JSON.stringify(data));
     entriesGrid.innerHTML = '';
+    location.reload();
 }
 
 formatDiaryBtn.addEventListener("click", () => {
@@ -63,6 +69,20 @@ formatCancelBtn.forEach((btn) =>{
     btn.addEventListener("click" ,()=>{
         hideStuffs(formatConfirm);
     })
+});
+
+//search functions
+
+searchCancelBtn.addEventListener("click",()=>{
+    search.classList.toggle("hide");    
+    createEntry.disabled = false;
+});
+
+searchDiaryBtn.addEventListener('click', () => {
+    hideStuffs(search);
+    createEntry.disabled = true;
+    navMenu.classList.toggle('visibleMenu');
+    opacityOfNotify(search);
 });
 
 
@@ -213,7 +233,12 @@ scrollUp.addEventListener("click", () => {
 
 
 createEntry.addEventListener('click', () => {
+    if (createEntry.disabled) {
+        return; 
+    }
+
     toggleHiddenElement(form);
+    entryContent.focus();
     updateFormDate();
 });
 
